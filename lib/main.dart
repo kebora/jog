@@ -20,8 +20,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // log("Currently notification is: ${GetStorage().read("notificationEnabled")}");
-
     return GetMaterialApp(
       title: 'Jogging App',
       theme: GetStorage().read("theme") == false
