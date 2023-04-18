@@ -16,6 +16,12 @@ class SettingsPage extends StatelessWidget {
     return const SettingsView();
   }
 }
+Future<void> _launchUrl() async {
+  final Uri _url = Uri.parse(urlToRepo);
+  if (!await launchUrl(_url)) {
+    const GetSnackBar(message: "Could not launch $urlToRepo");
+  }
+}
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -121,14 +127,7 @@ class SettingsView extends StatelessWidget {
                 "Your software does not have to be limited!\nClick here to access source code for free!",
                 style: TextStyle(fontSize: 12),
               ),
-              onTap: () async{
-                final Uri _url = Uri.parse(urlToRepo);
-                if (await canLaunchUrl(_url)) {
-                  await launchUrl(_url);
-                } else {
-                  const GetSnackBar(message: "Could not launch $urlToRepo");
-                }
-              },
+              onTap: _launchUrl,
             ),
             ListTile(
               leading: Icon(
