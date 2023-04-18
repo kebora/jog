@@ -1,3 +1,4 @@
+import 'package:boraweather/constants.dart';
 import 'package:boraweather/controllers/city_textfield_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_exit_app/flutter_exit_app.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -119,8 +121,13 @@ class SettingsView extends StatelessWidget {
                 "Your software does not have to be limited!\nClick here to access source code for free!",
                 style: TextStyle(fontSize: 12),
               ),
-              onTap: () {
-                
+              onTap: () async{
+                final Uri _url = Uri.parse(urlToRepo);
+                if (await canLaunchUrl(_url)) {
+                  await launchUrl(_url);
+                } else {
+                  const GetSnackBar(message: "Could not launch $urlToRepo");
+                }
               },
             ),
             ListTile(
