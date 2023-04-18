@@ -147,6 +147,10 @@ class _HomePageState extends State<HomePage> {
                   "type 'Null' is not a subtype of type 'num'") {
                 return const InvalidCityName();
               }
+              if (snapshot.error.toString() ==
+                  "Failed host lookup: 'api.weatherbit.io'") {
+                return const Refresh();
+              }
               return LoadingPage(
                 message: "${snapshot.error}",
               );

@@ -1,6 +1,7 @@
 import 'package:boraweather/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restart_app/restart_app.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({Key? key, required this.message}) : super(key: key);
@@ -81,6 +82,33 @@ class InvalidCityName extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Refresh extends StatelessWidget {
+  const Refresh({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Check your Internet connection and Retry!",
+            style: TextStyle(
+              fontSize: 15,
+            ),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              Restart.restartApp();
+            },
+            child: const Icon(Icons.refresh),
+          ),
+        ],
       ),
     );
   }
